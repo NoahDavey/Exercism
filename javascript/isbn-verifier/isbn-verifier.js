@@ -17,15 +17,9 @@ export const isValid = (isbn) => {
   if(isbnCharacters.length !== 10)
     return false
 
-  // Variables for calculating the isbn validity
-  let isbnMultiplier = 10
-  let isbnTotal = 0
-  for(const char of isbnCharacters) {
-    let maskedChar = Number(maskX(char))
-    isbnTotal += maskedChar * isbnMultiplier
-    isbnMultiplier--
-  }
+  const isbnTotal = isbnCharacters.reduce((prev, curr, idx) => {
+    return prev + (10 - idx) * Number(maskX(curr))
+  }, 0)
 
-  if(isbnTotal % 11 == 0) return true
-  else return false
+  return isbnTotal % 11 === 0
 };

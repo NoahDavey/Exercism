@@ -16,16 +16,19 @@ export const rows = (letter) => {
     }
   }
 
-  const spacesNeeded = totalRows - 2
 
-  for(let j = 0; j < Math.ceil(totalRows / 2); j++) {
-      console.log(j);
-      const currLetter = diamond[j]
-      for(let k = 0; k < spacesNeeded; k++) {
-          const outerSpaces = ' '.repeat(spacesNeeded - k) 
-          diamond[j] = outerSpaces + currLetter + (![0, totalRows].includes(j) ? '' : ' '.repeat(k) + currLetter) + outerSpaces
-          // diamond[totalRows - j] = 
-      }        
+  for (let index = 0; index <= Math.floor(diamond.length / 2); index++) {
+      const outsideSpaces = Math.abs(letterNum - index)
+      if(index === 0 || index === diamond.length - 1) {
+          diamond[index] = ' '.repeat(outsideSpaces) + diamond[index] + ' '.repeat(outsideSpaces)
+          diamond[diamond.length - 1 - index] = ' '.repeat(outsideSpaces) + diamond[diamond.length -1- index] + ' '.repeat(outsideSpaces)
+      } else {
+          const insideSpaces = index * 2 - 1
+          diamond[index] = ' '.repeat(outsideSpaces) + diamond[index] + ' '.repeat(insideSpaces) + diamond[index] + ' '.repeat(outsideSpaces)
+          if(index != Math.floor(diamond.length / 2)) {
+              diamond[diamond.length - 1 -index] = ' '.repeat(outsideSpaces) + diamond[diamond.length - 1 -index] + ' '.repeat(insideSpaces) + diamond[diamond.length - 1 -index] + ' '.repeat(outsideSpaces)
+          }
+      }
   }
 
   return diamond

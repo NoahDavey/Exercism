@@ -17,8 +17,8 @@ export class BinarySearchTree {
   }
 
   insert(num) {
-    const left = num <= this._data
-    if(left) {
+    const insertLeft = num <= this._data
+    if(insertLeft) {
       if(this._left) {
         this._left.insert(num)
       } else {
@@ -35,30 +35,12 @@ export class BinarySearchTree {
   }
 
   each(cbFunc) {
-      const orderedTree = []
-      for
-      // Loop over all in some order and call cbFunc with data
+      const currentElement = this
+      const left = currentElement.left
+      const right = currentElement.right
+      
+      if(left) left.each(cbFunc)
+      cbFunc(currentElement.data)
+      if(right) right.each(cbFunc) 
   }
-
-  ordered = []
-  orderTree(tree) {
-
-
-  }
-
-  // [Symbol.iterator]() {
-  //     const current = 1
-  //     const last = 5
-
-  //     return {
-  //         next() {
-  //             if(current < last) {
-  //                 return {done: false, value: current++}
-  //             } else {
-  //                 return {done: true}
-  //             }
-  //         }
-  //     }
-  // }
 }
-
